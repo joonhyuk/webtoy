@@ -11,6 +11,9 @@ function getQueryString(key) {
 }
 
 function encodeCP949(s) {
+    if (s.length == 0) {
+        return ''
+    }
     var buf = '';
     for (var i = 0, len = s.length; i < len; i++) {
         buf += charTable[s[i]];
