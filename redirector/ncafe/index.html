@@ -5,7 +5,7 @@
 <body>
 <script src="/webtoy/js/cp949coder.js"></script>
 <script>
-    window.location.href = 'https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=' + getQueryString('c') + '&search.query=' + encodeCP949(getQueryString('q'));
+    window.location.href = 'https://cafe.naver.com/ArticleSearchList.nhn?search.clubid=' + getQueryString('c') + '&search.query=' + encodeCP949(getQueryString('q') + '&search.exclude=' + encodeCP949(getQueryString('e')) + '&search.searchBy=1');
 </script>
 </body>
 </html>
