@@ -1,4 +1,4 @@
-import "/webtoy/js/charTable.js";
+import './charTable.js';
 
 function getQueryString(key) {
     var query = window.location.search.substring(1);
