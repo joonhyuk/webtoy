@@ -1,4 +1,4 @@
-import charTable from "charTable.js"
+import "charTable.js";
 
 function getQueryString(key) {
     var query = window.location.search.substring(1);
