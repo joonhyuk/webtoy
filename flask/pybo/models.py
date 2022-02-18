@@ -1,4 +1,4 @@
-from sqlalchemy import false
+from sqlalchemy import false, true
 from pybo import db
 
 class Question(db.Model):
@@ -14,4 +14,9 @@ class Answer(db.Model):
     content = db.Column(db.Text(), nullable = False)
     create_date = db.Column(db.DateTime(), nullable = False)
     
-    
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    email = db.Column(db.String(256), unique = True, nullable = False)
+    password = db.Column(db.String(256), nullable = False)
+    username = db.Column(db.String(32))
+    create_date = db.Column(db.DateTime(), nullable = False)
