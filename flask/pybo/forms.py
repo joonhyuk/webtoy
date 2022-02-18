@@ -19,3 +19,6 @@ class UserCreateForm(FlaskForm):
 class UserLoginForm(FlaskForm):
     email = StringField('이메일', validators=[DataRequired(), Email()])
     password = PasswordField('암호', validators=[DataRequired()])
+
+class CommentForm(FlaskForm):
+    content = TextAreaField('내용', validators=[DataRequired()])
