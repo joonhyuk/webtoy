@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, url_for
+from flask import Blueprint, render_template, request, url_for, g
+from .auth_views import login_required
 from pybo.models import Question
 from ..forms import QuestionForm, AnswerForm
 
@@ -9,11 +10,12 @@ from .. import db
 bp = Blueprint('question', __name__, url_prefix='/question')
 
 @bp.route('/create/', methods=('GET', 'POST'))
+@login_required
 def create():
     form = QuestionForm()
     print(form.validate_on_submit())
     if request.method == 'POST' and form.validate_on_submit():
-        question = Question(subject=form.subject.data, content=form.content.data, create_date=datetime.now())
+        question = Question(subject=form.subject.data, content=form.content.data, create_date=datetime.now(), user=g.user)
         db.session.add(question)
         db.session.commit()
         return redirect(url_for('main.index'))

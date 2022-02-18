@@ -7,14 +7,15 @@
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">{{ question.content }}</div>
             <div class="d-flex justify-content-end">
-                <div class="badge badge-light p-2">
-                    {{ question.create_date|datetime }}
+                <div class="badge badge-light p-2 text-left">
+                    <div class="mb-2">{{ question.user.username }}</div>
+                    <div>{{ question.create_date|datetime }}</div>
                 </div>
             </div>
         </div>
     </div>
     <h5 class="border-bottom my-3 py-2">
-        {% if question.answer_set|length == 0 %}처음 답하는 영광을 누리세요
+        {% if question.answer_set|length == 0 %}첫 답글을 남겨주세요!
         {% else %}{{ question.answer_set|length }}개의 답변이 있습니다.
         {% endif %}
     </h5>
@@ -23,8 +24,9 @@
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">{{ answer.content }}</div>
             <div class="d-flex justify-content-end">
-                <div class="badge badge-light p-2">
-                    {{ answer.create_date|datetime }}
+                <div class="badge badge-light p-2 text-left">
+                    <div class="mb-2">{{ answer.user.username }}</div>
+                    <div>{{ answer.create_date|datetime }}</div>
                 </div>
             </div>
         </div>
@@ -38,9 +40,13 @@
         </div>
         {% endfor %}
         <div class="form-group">
-            <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+            <textarea {% if not g.user %}disabled {% endif %}name="content" id="content" class="form-control" rows="10"></textarea>
         </div>
+        {% if not g.user %}
+        <a href="{{ url_for('auth.login') }}" class="btn btn-primary my-3">답변을 위해 로그인</a>
+        {% else %}
         <input type="submit" values="답변등록" class="btn btn-primary my-3">
+        {% endif %}
     </form>
 </div>
 {% endblock %}
