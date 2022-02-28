@@ -34,7 +34,7 @@ def login():
         error = None
         user = User.query.filter_by(email = form.email.data).first()
         if not user:
-            error = '존자하지 않는 사용자입니다.'
+            error = '존재하지 않는 사용자입니다.'
         elif not check_password_hash(user.password, form.password.data):
             error = '암호가 잘못 입력되었습니다.'
         if error is None:
